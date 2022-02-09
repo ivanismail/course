@@ -2,6 +2,7 @@ import 'package:course/app/modules/home/controllers/home_controller.dart';
 import 'package:course/app/routes/app_pages.dart';
 import 'package:course/app/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:get/get.dart';
 
@@ -37,11 +38,7 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               SizedBox(height: 12),
-              ProductCard(
-                name: 'Website Design & Development',
-                ratting: 4,
-                totalReview: 95,
-              ),
+              ListProduct()
             ],
           ),
         ),
@@ -192,27 +189,62 @@ class AppBarHome extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            child: IconButton(
+            padding: EdgeInsets.only(left: 12),
+            child: SvgPicture.asset(
+              'assets/menu.svg',
               color: MyColor.netral9(),
-              onPressed: () {},
-              icon: Icon(Icons.menu),
+              height: 30,
+              width: 30,
             ),
           ),
           ClipRRect(
             child: Container(
+              height: 50,
+              width: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
                 color: MyColor.purple(),
               ),
-              child: IconButton(
-                color: MyColor.netral1(),
-                onPressed: () {},
-                icon: Icon(Icons.search),
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: SvgPicture.asset(
+                  'assets/search.svg',
+                  color: MyColor.netral1(),
+                ),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class ListProduct extends StatelessWidget {
+  const ListProduct({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(12),
+      child: ListView.builder(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          primary: true,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: 3,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                ProductCard(
+                  name: 'Website Design & Development',
+                  ratting: 4,
+                  totalReview: 95,
+                ),
+                SizedBox(height: 24),
+              ],
+            );
+          }),
     );
   }
 }

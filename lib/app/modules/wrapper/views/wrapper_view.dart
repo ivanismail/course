@@ -1,6 +1,7 @@
 import 'package:course/app/modules/wrapper/controllers/wrapper_controller.dart';
 import 'package:course/app/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:circle_nav_bar/circle_nav_bar.dart';
 
@@ -31,18 +32,84 @@ class _WrapperViewState extends State<WrapperView> {
             //   ],
             // ),
             activeIcons: [
-              Icon(Icons.home, color: MyColor.purple()),
-              Icon(Icons.receipt, color: MyColor.purple()),
-              Icon(Icons.card_travel, color: MyColor.purple()),
-              Icon(Icons.favorite, color: MyColor.purple()),
-              Icon(Icons.person, color: MyColor.purple()),
+              // Icon(Icons.home, color: MyColor.purple()),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: SvgPicture.asset(
+                  'assets/home.svg',
+                  color: MyColor.purple(),
+                  height: 30,
+                  width: 30,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: SvgPicture.asset(
+                  'assets/video.svg',
+                  color: MyColor.purple(),
+                  height: 30,
+                  width: 30,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: SvgPicture.asset(
+                  'assets/shopping-basket.svg',
+                  color: MyColor.purple(),
+                  height: 30,
+                  width: 30,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: SvgPicture.asset(
+                  'assets/heart.svg',
+                  color: MyColor.purple(),
+                  height: 30,
+                  width: 30,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                child: SvgPicture.asset(
+                  'assets/user.svg',
+                  color: MyColor.purple(),
+                  height: 30,
+                  width: 30,
+                ),
+              ),
             ],
             inactiveIcons: [
-              Icon(Icons.home, color: MyColor.netral6()),
-              Icon(Icons.receipt, color: MyColor.netral6()),
-              Icon(Icons.card_travel, color: MyColor.netral6()),
-              Icon(Icons.favorite, color: MyColor.netral6()),
-              Icon(Icons.person, color: MyColor.netral6()),
+              SvgPicture.asset(
+                'assets/home.svg',
+                color: MyColor.netral6(),
+                height: 30,
+                width: 30,
+              ),
+              SvgPicture.asset(
+                'assets/video.svg',
+                color: MyColor.netral6(),
+                height: 30,
+                width: 30,
+              ),
+              SvgPicture.asset(
+                'assets/shopping-basket.svg',
+                color: MyColor.netral6(),
+                height: 30,
+                width: 30,
+              ),
+              SvgPicture.asset(
+                'assets/heart.svg',
+                color: MyColor.netral6(),
+                height: 30,
+                width: 30,
+              ),
+              SvgPicture.asset(
+                'assets/user.svg',
+                color: MyColor.netral6(),
+                height: 30,
+                width: 30,
+              ),
             ],
             color: Colors.white,
             height: 60,

@@ -1,5 +1,6 @@
 import 'package:course/app/themes/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 
@@ -14,7 +15,7 @@ class ProductDetailView extends GetView<ProductDetailController> {
         padding: EdgeInsets.only(left: 24, right: 24),
         child: Column(
           children: [
-            SizedBox(height: 50),
+            SizedBox(height: 40),
             AppBarDetail(),
             SizedBox(height: 12),
             GetBuilder<ProductDetailController>(
@@ -78,10 +79,13 @@ class ProductDetailView extends GetView<ProductDetailController> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Icon(
-                                  Icons.star,
-                                  color: MyColor.netral1(),
-                                  size: 35,
+                                Container(
+                                  child: SvgPicture.asset(
+                                    'assets/star.svg',
+                                    color: MyColor.netral1(),
+                                    height: 30,
+                                    width: 30,
+                                  ),
                                 ),
                                 Text(
                                   '4.8',
@@ -162,10 +166,14 @@ class AppBarDetail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 color: MyColor.netral1(),
               ),
-              child: IconButton(
-                color: MyColor.pink(),
-                onPressed: () {},
-                icon: Icon(Icons.favorite),
+              child: Container(
+                padding: EdgeInsets.all(6),
+                child: SvgPicture.asset(
+                  'assets/heart.svg',
+                  color: MyColor.pink(),
+                  height: 30,
+                  width: 30,
+                ),
               ),
             ),
           ),
