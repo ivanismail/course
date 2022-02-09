@@ -113,23 +113,89 @@ class ProductDetailView extends GetView<ProductDetailController> {
               },
             ),
             SizedBox(height: 12),
-            GetBuilder<ProductDetailController>(
-              init: ProductDetailController(),
-              initState: (_) {},
-              builder: (_) {
-                return ClipPath(
-                  clipper: MyClipperButton(),
+            DetailContent(),
+            SizedBox(height: 12),
+            Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  child: Container(
+                    width: 90,
+                    height: 65,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                      color: MyColor.pink(),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: SvgPicture.asset(
+                        'assets/comments.svg',
+                        color: MyColor.netral1(),
+                      ),
+                    ),
+                  ),
+                ),
+                ClipPath(
+                  clipper: MyClipperCustom(),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(25),
                       color: MyColor.purple(),
                     ),
-                    height: Get.height / 10,
+                    height: Get.height / 8,
                     width: Get.width,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                            left: 100,
+                          ),
+                          child: Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  LabelText(
+                                    title: 'Price',
+                                    color: MyColor.netral3(),
+                                    size: 22,
+                                  ),
+                                  LabelText(
+                                    title: 'Rp.99.000,-',
+                                    color: MyColor.netral1(),
+                                    size: 20,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(width: 10),
+                              Container(
+                                width: 110,
+                                height: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: MyColor.netral4(),
+                                ),
+                                child: Container(
+                                  padding: EdgeInsets.all(20),
+                                  child: LabelText(
+                                    title: 'Buy',
+                                    color: MyColor.netral1(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                );
-              },
-            ),
+                ),
+              ],
+            )
           ],
         ),
       ),
@@ -187,11 +253,14 @@ class LabelText extends StatelessWidget {
   final String? title;
   final Color? color;
   final double? size;
+  final TextAlign? textAlign;
+
   const LabelText({
     Key? key,
     required this.title,
     this.color,
     this.size,
+    this.textAlign,
   }) : super(key: key);
 
   @override
@@ -200,6 +269,7 @@ class LabelText extends StatelessWidget {
       padding: const EdgeInsets.only(left: 12),
       child: Text(
         this.title.toString(),
+        textAlign: this.textAlign ?? TextAlign.left,
         style: TextStyle(
           fontSize: this.size ?? 30,
           color: this.color ?? MyColor.netral8(),
@@ -346,35 +416,36 @@ class MyClipper extends CustomClipper<Path> {
 class MyClipperCustom extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
-    double r = 40;
-    double b = 120;
-    double h = size.height;
-    double w = size.width;
-
     var path = Path();
-    path.lineTo(0, h - r); //kiri atas ke bawah
-    path.quadraticBezierTo(0, h, r, h);
-
-    path.lineTo(w - (b + r), h);
-    path.quadraticBezierTo(w - b, h, w - b, h - r);
-
-    path.lineTo(w - b, h - b);
-    // path.quadraticBezierTo(
-    //   w,
-    //   h - b,
-    //   w,
-    //   h - b,
-    // );
-
-    path.lineTo(w - r, h - b);
-    path.quadraticBezierTo(
-      w - r,
-      h - r,
-      w,
-      h - b - r,
-    );
-
-    path.lineTo(w, 0);
+    path.moveTo(size.width * 0.2067416, size.height * 0.6373239);
+    path.cubicTo(
+        size.width * 0.2377685,
+        size.height * 0.6373239,
+        size.width * 0.2629213,
+        size.height * 0.5585007,
+        size.width * 0.2629213,
+        size.height * 0.4612676);
+    path.lineTo(size.width * 0.2629213, size.height * 0.1760563);
+    path.cubicTo(size.width * 0.2629213, size.height * 0.07882324,
+        size.width * 0.2880742, 0, size.width * 0.3191011, 0);
+    path.lineTo(size.width * 0.9438202, 0);
+    path.cubicTo(size.width * 0.9748472, 0, size.width,
+        size.height * 0.07882324, size.width, size.height * 0.1760563);
+    path.lineTo(size.width, size.height * 0.8239437);
+    path.cubicTo(size.width, size.height * 0.9211761, size.width * 0.9748472,
+        size.height, size.width * 0.9438202, size.height);
+    path.lineTo(size.width * 0.05617978, size.height);
+    path.cubicTo(size.width * 0.02515258, size.height, 0,
+        size.height * 0.9211761, 0, size.height * 0.8239437);
+    path.lineTo(0, size.height * 0.8133803);
+    path.cubicTo(
+        0,
+        size.height * 0.7161479,
+        size.width * 0.02515258,
+        size.height * 0.6373239,
+        size.width * 0.05617978,
+        size.height * 0.6373239);
+    path.lineTo(size.width * 0.2067416, size.height * 0.6373239);
     path.close();
 
     return path;
@@ -418,5 +489,102 @@ class RPSCustomPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
+  }
+}
+
+class DetailContent extends StatelessWidget {
+  const DetailContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        LabelText(
+          title:
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s. Dummy text of the printing and typesetting industry.',
+          size: 18,
+          color: MyColor.netral7(),
+          textAlign: TextAlign.justify,
+        ),
+        SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: MyColor.netral1(),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: SvgPicture.asset(
+                        'assets/video.svg',
+                        color: MyColor.blue(),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      LabelText(
+                        title: 'Total Video',
+                        size: 16,
+                      ),
+                      LabelText(
+                        title: '20 Videos',
+                        size: 16,
+                        color: MyColor.netral7(),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: MyColor.netral1(),
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.all(10),
+                      child: SvgPicture.asset(
+                        'assets/clock.svg',
+                        color: MyColor.blue(),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabelText(
+                        title: 'Delivery Time',
+                        size: 16,
+                      ),
+                      LabelText(
+                        title: '20 Days',
+                        size: 16,
+                        color: MyColor.netral7(),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 12),
+      ],
+    );
   }
 }
