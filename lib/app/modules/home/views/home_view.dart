@@ -1,6 +1,6 @@
 import 'package:course/app/modules/home/controllers/home_controller.dart';
-import 'package:course/app/routes/app_pages.dart';
 import 'package:course/app/themes/colors.dart';
+import 'package:course/app/widgets/label_text.dart';
 import 'package:course/app/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -147,33 +147,6 @@ class ListCategory extends StatelessWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class LabelText extends StatelessWidget {
-  final String? title;
-  final Color? color;
-  final double? size;
-  const LabelText({
-    Key? key,
-    required this.title,
-    this.color,
-    this.size,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12),
-      child: Text(
-        this.title.toString(),
-        style: TextStyle(
-          fontSize: this.size ?? 30,
-          color: this.color ?? MyColor.netral8(),
-          fontWeight: FontWeight.bold,
-        ),
       ),
     );
   }
