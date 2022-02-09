@@ -13,7 +13,7 @@ class WrapperController extends GetxController {
         HomeView(),
         ProfileView(),
         FavoriteView(),
-        ProfileView(),
         FavoriteView(),
+        ProfileView(),
       ];
 }
